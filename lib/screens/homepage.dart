@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:movies/widget/app_large_text.dart';
 
+import '../widget/search.dart';
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({
     super.key,
@@ -13,8 +15,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    var deviceHeight = MediaQuery.of(context).size.height;
+    final deviceWidth = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
         body: GestureDetector(
@@ -22,9 +27,9 @@ class _MyHomePageState extends State<MyHomePage> {
             FocusScope.of(context).unfocus();
           },
           child: Column(
-            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
               Container(
                 padding: const EdgeInsets.all(8),
                 child: Row(
@@ -48,39 +53,30 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               const Gap(10),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: SizedBox(
-                  height: 70,
-                  child: TextField(
-                    controller: searchController,
-                    decoration: InputDecoration(
-                      prefixIcon: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.search),
-                      ),
-                      suffixText: "Filter",
-                      suffixIcon: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.menu),
-                      ),
-                      hintText: "Search your movie",
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.transparent),
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.transparent),
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      filled: true,
-                    ),
-                  ),
-                ),
-              )
+              searchWidget(),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget searchWidget() {
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.06,
+      width: MediaQuery.of(context).size.width * 0.9,
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(159, 185, 97, 97),
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SearchFileWidget(searchController: searchController),
+          // const Filter(),
+        ],
       ),
     );
   }
