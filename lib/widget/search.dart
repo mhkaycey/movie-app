@@ -41,7 +41,7 @@ class _SearchFileWidgetState extends State<SearchFileWidget> {
       height: deviceHeight * 0.05,
       child: TextField(
         controller: widget.searchController,
-        style: const TextStyle(color: Colors.white),
+        // style: const TextStyle(color: Colors.white),
         decoration: InputDecoration(
           focusedBorder: border,
           border: border,
